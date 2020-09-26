@@ -21,18 +21,19 @@ If the carbon atom adjacent to the vacancy is the isotope <sup>13</sup>C, the ha
 where:
 - I<sub>n</sub> is the n<sup>th</sup> component of the nuclear spin operator
 - A<sub>ij</sub> is the ij<sup>th</sup> component of the Hyperfine tensor
-- &#947;<sub>n</sub> is the gyromagnetic ratio of the C<sup>13</sup> nucleus
+- &#947;<sub>n</sub> is the gyromagnetic ratio of the <sup>13</sup>C nucleus
 
-### Solving the Hamiltonain
-The eigenstates and eigenvalues of both the spin hamiltonian and the hamiltonian with hyperfine coupling have been included in ```nvham.py```. 
-The values considered for magnetic field, hyperfine tensor components, gyromagnetic ratios have been taken from [**References**](###references) 2 and 3.
+### Solving the Hamiltonian
+The eigenstates and eigenvalues of both the spin hamiltonian and the hamiltonian with hyperfine coupling have been found from ```nvham.py```. 
+The values considered for magnetic field, hyperfine tensor components, gyromagnetic ratios have been taken from [**References**](### references) 2 and 3.
 
 Key points to note in ```nvham.py```:
 - ```tensor(qeye(3),Iz)``` and ```tensor(qeye(2),Sz)``` are considered to couple the operators S<sub>n</sub> and I<sub>n</sub> which matches their dimensions.
 - ```H.eigenstates()``` outputs the eigenenergies and the eigenkets of the Hamiltonian.
 
 **Output:**
-```Spin Hamiltonian Eigenenergies: [-63.29995827   0.          63.29995827]
+```
+Spin Hamiltonian Eigenenergies: [-63.29995827   0.          63.29995827]
 
 Spin Hamiltonian Eigenstates: (array([Quantum object: dims = [[3], [1]], shape = (3, 1), type = ket
 Qobj data =

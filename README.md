@@ -25,7 +25,7 @@ where:
 
 ### Solving the Hamiltonian
 The eigenstates and eigenvalues of both the spin hamiltonian and the hamiltonian with hyperfine coupling have been found from ```nvham.py```. 
-The values considered for magnetic field, hyperfine tensor components, gyromagnetic ratios have been taken from [**References**](### references) 2 and 3.
+The values considered for magnetic field, hyperfine tensor components, gyromagnetic ratios have been taken from [**References**](###references) 2 and 3.
 
 Key points to note in ```nvham.py```:
 - ```tensor(qeye(3),Iz)``` and ```tensor(qeye(2),Sz)``` are considered to couple the operators S<sub>n</sub> and I<sub>n</sub> which matches their dimensions.

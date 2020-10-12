@@ -78,7 +78,7 @@ class NVHamiltonian():
 	def plotter_BvsF(self):
 		#Plotting ms=0 to ms=1 transition frequency as a function of magnetic field for hyperfine Hamiltonian
 		Bz = np.linspace(0,1e-3,100)
-		Bzoom = np.linspace(0,2e-4,50)
+		Bzoom = np.linspace(0,3e-4,50)
 		hpham = np.vectorize(self.hyperfineHamiltonian, otypes=[np.ndarray])
 		freqs = np.array(hpham(Bz))
 		freqs_zoom = np.array(hpham(Bzoom))
@@ -129,7 +129,7 @@ class NVHamiltonian():
 		
 if __name__ == '__main__':
 	run = NVHamiltonian()
-	run.plotter_resonance()
+	run.plotter_BvsF()
 	
 		
 		

@@ -6,8 +6,9 @@ from hamiltonians import HyperfineSpin1
 
 ham = HyperfineSpin1()
 
-def plotter_resonance(): #This function will need changes to plot. self.Eigenstates_hf has been removed.
-	# Plotting Hyperfine Resonant frequencies
+# Plotting Hyperfine Resonant frequencies
+def plotter_resonance(): 
+	# generating all possible frequencies
 	reso = np.full((18),1)
 	freq = []
 	egsts = ham.eigenvalues(1.199e-4)
@@ -16,40 +17,35 @@ def plotter_resonance(): #This function will need changes to plot. self.Eigensta
 			freq.append(egsts[j]-egsts[i])
 	freq = np.sort(freq)*0.000000001
 	
-	#print(freq)
+	# plot first 6 frequencies
 	fig = plt.figure()
 	ax1 = fig.add_subplot(311)
-	#ax1.set_xlabel('Frequency in GHz',fontsize=12)
 	ax1.set_ylabel('Resonant Amplitude',fontsize=12)
 	ax1.set_title("Resonant Frequencies")
 	ax1.bar(freq[0:6],reso[0:6],width=0.00003,bottom=None)
 	
+	# plot next 6 frequencies
 	ax2 = fig.add_subplot(312)
-	#ax2.set_xlabel('Frequency in GHz',fontsize=12)
 	ax2.set_ylabel('Resonant Amplitude',fontsize=12)
-	#ax2.set_title("Resonant Frequencies")
 	ax2.bar(freq[6:12],reso[0:6],width=0.00003,bottom=None)
 	
+	# plot next 6 frequencies
 	ax3 = fig.add_subplot(313)
 	ax3.set_xlabel('Frequency in GHz',fontsize=12)
 	ax3.set_ylabel('Resonant Amplitude',fontsize=12)
-	#ax3.set_title("Resonant Frequencies")
 	ax3.bar(freq[12:18],reso[0:6],width=0.00003,bottom=None)
 	plt.show()
 
-def BvsF_plotter():				
+#Plotting ms=0 to ms=1 transition frequency as a function of magnetic field for hyperfine Hamiltonian
+def BvsF_plotter():
+	# B covers fields until the point where ms=-1 does not fall below ms=0
+	# Bzoom is for the zoomed graph			
 	hpham = np.vectorize(ham.transitionFreqs, otypes=[np.ndarray])
-	#hpham = np.vectorize(ham.transitionFreqs)	
-	#Plotting ms=0 to ms=1 transition frequency as a function of magnetic field for hyperfine Hamiltonian
 	Bz = np.linspace(0,1e-2,100)
 	Bzoom = np.linspace(0,5e-3,100)
-	#hpham = np.vectorize(self.hyperfineHamiltonian, otypes=[np.ndarray])
-
 	freqs = np.array(hpham(Bz))
 	freqs = np.array(freqs.tolist())
-	#print(freqs)
 	freqs_zoom = np.array(hpham(Bzoom))
-
 	freqs_zoom = np.array(freqs_zoom.tolist())
 
 	#Qutip by default arranges eigenvalues in sorted order. This never gives a negative frequency. So the graph has to be extended logically.
@@ -93,7 +89,7 @@ def BvsF_plotter():
 	axz.plot(Bzoom,freqs_zoom[:,3],label="$m_{s}=+1$, $m_{I}=-1$ \u2192 $m_{s}=0$") 
 	axz.plot(Bzoom,freqs_zoom[:,4],label="$m_{s}=+1$, $m_{I}=0$ \u2192 $m_{s}=0$") 
 	axz.plot(Bzoom,freqs_zoom[:,5],label="$m_{s}=+1$, $m_{I}=+1$ \u2192 $m_{s}=0$")
-	axz.locator_params(axis='x', nbins=4)  # to reduce crowding of ticks
+	axz.locator_params(axis='x', nbins=4)  			# to reduce crowding of ticks
 	plt.grid(b=True, which='major', color='#666666', linestyle='-')
 	plt.minorticks_on()
 	plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)

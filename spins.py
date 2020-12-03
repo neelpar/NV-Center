@@ -9,7 +9,7 @@ def plotter():
 	
 	B = np.linspace(0,1,500)
 	sham = np.vectorize(ham.spinProjection, otypes=[np.ndarray])
-	spins = np.array(sham(B,0,0))
+	spins = np.array(sham(B,0,0)) 			# contains all 9 spin components for all magnetic fields
 	spins = np.array(spins.tolist())
 
 	fig = plt.figure()

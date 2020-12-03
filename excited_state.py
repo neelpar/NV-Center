@@ -5,14 +5,16 @@ from hamiltonians import ExcitedState
 
 es = ExcitedState()
 
-def resonance_plotter(self,Bz):
+def resonance_plotter(self):
+	# generating all possible frequencies
 	reso = np.full((8),1)
-	egv = es.eigenvalues(1.199e-4)
+	egv = es.eigenvalues(1.199e-4)			# Bz = 1.199e-4 for plotting resonance frequencies
 	freq = []
 	for i in range (2):
 		for j in range (2,6):
 			freq.append(egv[j]-egv[i])
 			
+	# plot first 4 frequencies
 	freq = np.sort(freq)*0.000000001
 	fig = plt.figure()
 	ax1 = fig.add_subplot(211)
@@ -20,6 +22,7 @@ def resonance_plotter(self,Bz):
 	ax1.set_title("Resonant Frequencies")
 	ax1.bar(freq[0:4],reso[0:4],width=0.000003,bottom=None)
 	
+	# plot next 4 frequencies
 	ax2 = fig.add_subplot(212)
 	ax2.set_xlabel('Frequency in GHz',fontsize=12)
 	ax2.set_ylabel('Resonant Amplitude',fontsize=12)
@@ -27,10 +30,11 @@ def resonance_plotter(self,Bz):
 	plt.show()
 		
 def BvsF_plotter():
+	# B covers fields until the point where ms=-1 does not fall below ms=0
+	# Bzoom is for the zoomed graph
 	hpham = np.vectorize(es.transitionFreqs, otypes = [np.ndarray])
 	B = np.linspace(0,1e-2,100)
 	Bzoom = np.linspace(0,1e-2,100)
-	
 	freqs = np.array(hpham(B))
 	freqs_zoom = np.array(hpham(Bzoom))
 	freqs = np.array(freqs.tolist())
@@ -72,7 +76,7 @@ def BvsF_plotter():
 	axz.plot(Bzoom,freqs_zoom[:,1],label="$m_{s}=-1$, $m_{I}=-1/2$ \u2192 $m_{s}=0$") 
 	axz.plot(Bzoom,freqs_zoom[:,2],label="$m_{s}=+1$, $m_{I}=-1/2$ \u2192 $m_{s}=0$") 
 	axz.plot(Bzoom,freqs_zoom[:,3],label="$m_{s}=+1$, $m_{I}=+1/2$ \u2192 $m_{s}=0$") 
-	axz.locator_params(axis='x', nbins=4)  # to reduce crowding of ticks
+	axz.locator_params(axis='x', nbins=4)  			# to reduce crowding of ticks
 	plt.grid(b=True, which='major', color='#666666', linestyle='-')
 	plt.minorticks_on()
 	plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
@@ -81,6 +85,7 @@ def BvsF_plotter():
 		
 if __name__ == '__main__':
 	BvsF_plotter()
+	resonance_plotter()
 		
 		
 		
